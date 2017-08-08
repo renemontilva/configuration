@@ -57,7 +57,7 @@ class LifecycleHandler:
 
     def process_lifecycle_messages(self):
         queue_url = self.sqs_con.get_queue_url(QueueName=self.queue)['QueueUrl']
-        queue = boto3.resource('sqs').Queue(queue_url)
+        queue = boto3.resource('sqs', region_name=self.region).Queue(queue_url)
 
         # Needed to get unencoded message for ease of processing
         # queue.set_message_class(RawMessage)
