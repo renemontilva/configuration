@@ -359,3 +359,15 @@
 - Role: edxapp
   - Added `PASSWORD_MIN_LENGTH` for password minimum length validation on reset page.
   - Added `PASSWORD_MAX_LENGTH` for password maximum length validation on reset page.
+
+- Role: credentials
+  - Removed `CREDENTIALS_OAUTH_URL_ROOT` which is no longer used, as `COMMON_OAUTH_URL_ROOT` from `common_vars` is used
+  - Removed `CREDENTIALS_OIDC_LOGOUT_URL` which is no longer used, as `COMMON_OAUTH_LOGOUT_URL` from `common_vars` is used
+  - Removed `CREDENTIALS_JWT_AUDIENCE` which is no longer used, as `COMMON_JWT_AUDIENCE` from `common_vars` is used
+  - Removed `CREDENTIALS_JWT_ISSUER` which is no longer used, as `COMMON_JWT_ISSUER` from `common_vars` is used
+  - Removed `CREDENTIALS_JWT_SECRET_KEY` which is no longer used, as `COMMON_JWT_SECRET_KEY` from `common_vars` is used
+
+- Role: ecommerce
+  - Removed `ECOMMERCE_OAUTH_URL_ROOT` which is no longer used, as `COMMON_OAUTH_URL_ROOT` from `common_vars` is used
+  - Removed `ECOMMERCE_OIDC_LOGOUT_URL` which is no longer used, as `COMMON_OAUTH_LOGOUT_URL` from `common_vars` is used
+  - Removed `ECOMMERCE_JWT_SECRET_KEY` which is no longer used, as `COMMON_JWT_SECRET_KEY` from `common_vars` is used
