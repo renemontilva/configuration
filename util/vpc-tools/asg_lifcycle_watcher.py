@@ -109,7 +109,7 @@ class LifecycleHandler:
     def delete_sqs_message(self, queue, sqs_message, as_message, dry_run):
         if not dry_run:
             logging.info("Deleting message with body {message}".format(message=as_message))
-            self.sqs_con.delete_message(QueueUrl=queue.url, ReceiptHandle=sqs_message.receipt_handle)
+            self.sqs_con.delete_message(QueueUrl=queue.url, ReceiptHandle=sqs_message['ReceiptHandle'])
         else:
             logging.info("Would have deleted message with body {message}".format(message=as_message))
 
@@ -171,7 +171,6 @@ class LifecycleHandler:
             tags_dict = {}
             for t in instance['Tags']:
                 tags_dict[t['Key']] = t['Value']
-            print tags_dict
             if 'safe_to_retire' in tags_dict and tags_dict['safe_to_retire'].lower() == 'true':
                 logging.info("Instance with id {id} is safe to retire.".format(id=instance_id))
                 return True
