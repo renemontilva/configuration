@@ -101,7 +101,7 @@ class LifecycleHandler:
             # These notifications are sent when configuring a new lifecycle hook, they can be
             # deleted safely
             elif as_message['Event'] == LifecycleHandler.TEST_NOTIFICATION:
-                self.delete_message(queue, sqs_message, as_message, self.dry_run)
+                self.delete_sqs_message(queue, sqs_message, as_message, self.dry_run)
             else:
                 raise NotImplemented("Encountered message, {message_id}, of unexpected type.".format(
                     message_id=as_message['MessageId']))
