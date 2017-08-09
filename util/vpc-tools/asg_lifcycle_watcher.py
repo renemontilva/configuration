@@ -51,7 +51,7 @@ class LifecycleHandler:
         if self.region:
             self.base_cli_command += "--region {region} ".format(region=self.region)
 
-        self.dry_run = True
+        self.dry_run = args.dry_run
         self.ec2_con = boto3.client('ec2',region_name=self.region)
         self.sqs_con = boto3.client('sqs',region_name=self.region)
 
@@ -109,7 +109,7 @@ class LifecycleHandler:
     def delete_sqs_message(self, queue, sqs_message, as_message, dry_run):
         if not dry_run:
             logging.info("Deleting message with body {message}".format(message=as_message))
-            # self.sqs_con.delete_message(QueueUrl=queue.url, ReceiptHandle=sqs_message.receipt_handle)
+            self.sqs_con.delete_message(QueueUrl=queue.url, ReceiptHandle=sqs_message.receipt_handle)
         else:
             logging.info("Would have deleted message with body {message}".format(message=as_message))
 
@@ -137,12 +137,12 @@ class LifecycleHandler:
 
         if not dry_run:
             logging.info(message)
-            # try:
-            #     output = subprocess.check_output(command.split(' '))
-            #     logging.info("Output was {output}".format(output=output))
-            # except Exception as e:
-            #     logging.exception(e)
-            #     raise  e
+            try:
+                output = subprocess.check_output(command.split(' '))
+                logging.info("Output was {output}".format(output=output))
+            except Exception as e:
+                logging.exception(e)
+                raise  e
         else:
             logging.info("Dry run: {message}".format(message=message))
 
@@ -201,7 +201,7 @@ if __name__=="__main__":
 
     parser.add_argument('-d', "--dry-run", dest="dry_run", action="store_true",
                         help='Print the commands, but do not do anything')
-    parser.set_defaults(dry_run=True)
+    parser.set_defaults(dry_run=False)
     args = parser.parse_args()
 
     lh = LifecycleHandler(args.region, args.queue, args.hook, args.dry_run, args.bin_directory)
