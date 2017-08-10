@@ -17,6 +17,22 @@ if [[ `lsb_release -rs` != "16.04" ]]; then
 fi
 
 ##
+## Check whether is a google cloud platforn @renemontilva
+##
+
+CURL='/usr/bin/curl'
+URL='metadata.google.internal'
+is_gcp=false
+BOTO_CONFIG=/edx/app/edxapp/.boto
+response= "$($CURL -s -i $URL | grep 'HTTP/1.1' | awk '{print $2}')"
+
+if [ -z $response ] && [ $response -eq 200 ]; then
+	is_gcp=true
+	export $BOTO_CONFIG
+if
+
+
+##
 ## Set ppa repository source for gcc/g++ 4.8 in order to install insights properly
 ##
 sudo apt-get install -y python-software-properties
@@ -75,11 +91,17 @@ CONFIGURATION_VERSION=${CONFIGURATION_VERSION-${OPENEDX_RELEASE-master}}
 ##
 ## Clone the configuration repository and run Ansible
 ##
-cd /var/tmp
-git clone https://github.com/edx/configuration
-cd configuration
-git checkout $CONFIGURATION_VERSION
-git pull
+#cd /var/tmp
+#git clone https://github.com/renemontilva/openedx-configuration
+#cd configuration
+#git checkout $CONFIGURATION_VERSION
+#git pull
+
+##
+## Grab the setting file from repo
+##
+
+curl https://github.com/renemontilva/openedx-server-vars/blob/master/server-vars.yml -o /tmp/server-vars
 
 ##
 ## Install the ansible requirements
@@ -90,4 +112,4 @@ sudo -H pip install -r requirements.txt
 ##
 ## Run the edx_sandbox.yml playbook in the configuration/playbooks directory
 ##
-cd /var/tmp/configuration/playbooks && sudo -E ansible-playbook -c local ./edx_sandbox.yml -i "localhost," $EXTRA_VARS "$@"
+cd /var/tmp/configuration/playbooks && sudo -E ansible-playbook -c local ./edx_sandbox.yml -i "localhost,"  -e@/tmp/server-vars.yml
