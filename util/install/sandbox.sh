@@ -25,11 +25,8 @@ URL='metadata.google.internal'
 is_gcp=false
 BOTO_CONFIG=/edx/app/edxapp/.boto
 response= "$($CURL -s -i $URL | grep 'HTTP/1.1' | awk '{print $2}')"
-
-if [ ! -z $response ] && [ $response -eq 200 ]; then
-	is_gcp=true
-	export $BOTO_CONFIG
-if
+is_gcp=true
+export $BOTO_CONFIG
 
 
 ##
