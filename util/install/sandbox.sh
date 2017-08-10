@@ -98,7 +98,7 @@ CONFIGURATION_VERSION=${CONFIGURATION_VERSION-${OPENEDX_RELEASE-master}}
 ## Grab the setting file from repo
 ##
 
-curl https://github.com/renemontilva/openedx-server-vars/blob/master/server-vars.yml -o /tmp/server-vars
+curl https://github.com/renemontilva/openedx-server-vars/blob/master/server-vars.yml -o /tmp/server-vars.yml
 
 ##
 ## Install the ansible requirements
