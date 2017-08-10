@@ -1173,6 +1173,7 @@ lms_env_config:
   PASSWORD_MIN_LENGTH: "{{ EDXAPP_PASSWORD_MIN_LENGTH }}"
   PASSWORD_MAX_LENGTH: "{{ EDXAPP_PASSWORD_MAX_LENGTH }}"
   ENTERPRISE_ENROLLMENT_API_URL: "{{ EDXAPP_ENTERPRISE_ENROLLMENT_API_URL }}"
+  PARENTAL_CONSENT_AGE_LIMIT: "{{ EDXAPP_PARENTAL_CONSENT_AGE_LIMIT }}"
 
 cms_auth_config:
   <<: *edxapp_generic_auth
@@ -1328,3 +1329,6 @@ SERVICE_WORKER_USERS:
     username: "{{ EDXAPP_ENTERPRISE_SERVICE_WORKER_USERNAME }}"
     is_staff: true
     is_superuser: false
+
+# The age at which a learner no longer requires parental consent, or None
+EDXAPP_PARENTAL_CONSENT_AGE_LIMIT: 13
