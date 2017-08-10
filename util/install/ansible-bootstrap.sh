@@ -22,7 +22,7 @@ if [[ -z "${ANSIBLE_VERSION}" ]]; then
 fi
 
 if [[ -z "${CONFIGURATION_REPO}" ]]; then
-  CONFIGURATION_REPO="https://github.com/edx/configuration.git"
+  CONFIGURATION_REPO="https://github.com/renemontilva/openedx-configuration.git"
 fi
 
 if [[ -z "${CONFIGURATION_VERSION}" ]]; then
@@ -46,7 +46,7 @@ SETUPTOOLS_VERSION="24.0.3"
 VIRTUAL_ENV="/tmp/bootstrap"
 PYTHON_BIN="${VIRTUAL_ENV}/bin"
 ANSIBLE_DIR="/tmp/ansible"
-CONFIGURATION_DIR="/tmp/configuration"
+CONFIGURATION_DIR="/tmp/openedx-configuration"
 EDX_PPA_KEY_SERVER="keyserver.ubuntu.com"
 EDX_PPA_KEY_ID="B41E5E3969464050"
 
